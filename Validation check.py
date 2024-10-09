@@ -1,11 +1,13 @@
 import re
+import sys
 
-Test_text = '''{namedfs}, ваша запись изменена:
+Test_text = '''{name}, ваша запись изменена:
 ⌚️ {day_month} в {start_time}
 👩 {master}
 Услуги:
 {services}
 управление записью {record_link}'''
+
 list_keys = ['name', 'day_month', 'day_of_week', 'start_time', 'end_time', 'master', 'services']
 
 
@@ -27,7 +29,8 @@ def find_key(text):
 
     for key in keys:
         if key not in list_keys:
-            return(f"Ошибка: некорректные данные -{key} ")
+            return(f"Ошибка: некорректные данные - {key} ")
+    return text
 
 
 print(find_key(Test_text))
