@@ -1,6 +1,8 @@
 import re
 import sys
 
+from const import list_keys
+
 Test_text = '''{name}, ваша запись изменена:
 ⌚️ {day_month} в {start_time}
 👩 {master}
@@ -8,7 +10,7 @@ Test_text = '''{name}, ваша запись изменена:
 {services}
 управление записью {record_link}'''
 
-list_keys = ['name', 'day_month', 'day_of_week', 'start_time', 'end_time', 'master', 'services']
+
 
 
 def find_key(text):
