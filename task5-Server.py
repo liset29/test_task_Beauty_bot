@@ -23,17 +23,13 @@ async def datalore_webhook(webhook: WebhookData):
     data = webhook.data
     try:
         func = globals()[func]
-
         if callable(func):
             await func(data)
         else:
-            print(f"Ошибка: {func} не является функцией.")
+            raise TypeError(f"Ошибка: {func} не является функцией.")
 
     except KeyError:
-        print(f"Ошибка: Функция {func} не найдена.")
-    except Exception as e:
-        print(f"Ошибка: {e}")
+        raise KeyError(f"Ошибка: Функция {func} не найдена.")
 
-# function_registry = {
-#     "function": function
-# }
+    except Exception as e:
+        raise RuntimeError(f"Ошибка при вызове функции {func}: {e}")

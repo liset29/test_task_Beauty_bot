@@ -7,7 +7,7 @@ Test_text = '''{name}, ваша запись изменена:
 👩 {master}
 Услуги:
 {services}
-управление записью {name}'''
+управление записью {namdsfe}'''
 
 
 
@@ -21,10 +21,10 @@ def find_key(text):
         elif char == '}':
             stack -= 1
             if stack < 0:
-                return 'Incorrect bracket sequence'
+                raise SyntaxError('Неправильная скобочная последовательность')
 
     if stack != 0:
-       logging.error('Incorrect bracket sequence')
+       raise SyntaxError('Неправильная скобочная последовательность')
 
 
     pattern = r"\{(.*?)\}"
@@ -32,7 +32,7 @@ def find_key(text):
 
     for key in keys:
         if key not in list_keys:
-            return(f"Ошибка: некорректные данные - {key} ")
+            raise ValueError(f"Ошибка: некорректные данные - {key}")
     return text
 
 
