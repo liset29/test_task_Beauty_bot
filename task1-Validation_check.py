@@ -1,6 +1,5 @@
+import logging
 import re
-import sys
-
 from const import list_keys
 
 Test_text = '''{name}, ваша запись изменена:
@@ -8,7 +7,7 @@ Test_text = '''{name}, ваша запись изменена:
 👩 {master}
 Услуги:
 {services}
-управление записью {record_link}'''
+управление записью {name}'''
 
 
 
@@ -22,9 +21,11 @@ def find_key(text):
         elif char == '}':
             stack -= 1
             if stack < 0:
-                return False
+                return 'Incorrect bracket sequence'
+
     if stack != 0:
-        return 'ошибка скобок'
+       logging.error('Incorrect bracket sequence')
+
 
     pattern = r"\{(.*?)\}"
     keys = re.findall(pattern, text)
